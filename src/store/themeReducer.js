@@ -1,4 +1,3 @@
-import { combineReducers } from "redux";
 import { SET_THEME } from "./themeActions";
 
 export const themeReducer = (state = "light", { type, payload }) => {
@@ -10,5 +9,3 @@ export const themeReducer = (state = "light", { type, payload }) => {
       return state;
   }
 };
-
-export const rootReducer = combineReducers({ theme: themeReducer });
