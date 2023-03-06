@@ -86,20 +86,22 @@ const Tag = styled.span`
   cursor: pointer;
 `;
 
-const Info = ({
-  name,
-  nativeName,
-  flag,
-  capital,
-  population,
-  region,
-  subregion,
-  topLevelDomain,
-  currencies = [],
-  languages = [],
-  borders = [],
-  push,
-}) => {
+const Info = (props) => {
+  const {
+    name,
+    nativeName,
+    flag,
+    capital,
+    population,
+    region,
+    subregion,
+    topLevelDomain = [],
+    currencies = [],
+    languages = [],
+    borders = [],
+    push,
+  } = props;
+  console.log("name >>> ", name);
   return (
     <Wrapper>
       <InfoImage src={flag} alt={name} />
@@ -126,7 +128,7 @@ const Info = ({
           </List>
           <List>
             <ListItem>
-              <b>Top Level Domain</b>{" "}
+              <b>Top Level Domain:</b>{" "}
               {topLevelDomain.map((d) => (
                 <span key={d}>{d}</span>
               ))}
@@ -134,13 +136,15 @@ const Info = ({
             <ListItem>
               <b>Currency</b>{" "}
               {currencies.map((c) => (
-                <span key={c.code}>{c.name} </span>
+                <span key={c.code}>
+                  {c.name} ({c.code}){" "}
+                </span>
               ))}
             </ListItem>
             <ListItem>
-              <b>Top Level Domain</b>{" "}
+              <b>Languages: </b>{" "}
               {languages.map((l) => (
-                <span key={l.name}>{l.name}</span>
+                <span key={l.name}> {l.name}; </span>
               ))}
             </ListItem>
           </List>
@@ -151,7 +155,7 @@ const Info = ({
             <span>There is no border countries</span>
           ) : (
             <TagGroup>
-              {[].map((b) => (
+              {borders.map((b) => (
                 <Tag key={b} onClick={() => push(`/country/${b}`)}>
                   {b}
                 </Tag>
