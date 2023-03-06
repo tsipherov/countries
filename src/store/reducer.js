@@ -1,9 +1,14 @@
-export const reducer = (state, { type, payload }) => {
+import { combineReducers } from "redux";
+import { SET_THEME } from "./themeActions";
+
+export const themeReducer = (state = "light", { type, payload }) => {
   switch (type) {
-    case "":
-      return { ...state };
+    case SET_THEME:
+      return { theme: payload };
 
     default:
       return state;
   }
 };
+
+export const rootReducer = combineReducers({ theme: themeReducer });
