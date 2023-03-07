@@ -1,5 +1,7 @@
-import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { setFilter, setRegion } from "../store/countryActions";
+import { selectCountriesInfo } from "../store/countrySelectors";
 import CustomSelect from "./CustomSelect";
 import Search from "./Search";
 
@@ -25,16 +27,27 @@ const Wrapper = styled.div`
 `;
 
 const Controls = () => {
+  const dispatch = useDispatch();
+  const { search, region } = useSelector(selectCountriesInfo);
+
+  const searchHendler = (str) => {
+    dispatch(setFilter(str));
+  };
+
+  const regionSelectHandler = (reg) => {
+    dispatch(setRegion(reg.value));
+  };
+
   return (
     <Wrapper>
-      <Search />
+      <Search search={search} setSearch={searchHendler} />
       <CustomSelect
         options={options}
         placeholder="Filter by Region"
         isClearable
         isSearchable={false}
-        value={""}
-        onChange={() => {}}
+        value={optionsMap[region]}
+        onChange={regionSelectHandler}
       />
     </Wrapper>
   );

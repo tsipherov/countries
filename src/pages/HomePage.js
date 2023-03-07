@@ -6,20 +6,25 @@ import Controls from "../components/Controls";
 import { useDispatch, useSelector } from "react-redux";
 import { loadCountries } from "../store/countryActions";
 import {
-  selectAllCountries,
   selectCountriesInfo,
+  selectFilteredCountries,
 } from "../store/countrySelectors";
 
 const HomePage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const countries = useSelector(selectAllCountries);
-  const { status, error, qnt } = useSelector(selectCountriesInfo);
+
+  const { status, error, qnt, search, region } =
+    useSelector(selectCountriesInfo);
+  const filteredCountries = useSelector((state) =>
+    selectFilteredCountries(state, { search, region })
+  );
+
   useEffect(() => {
     if (!qnt) {
       dispatch(loadCountries());
     }
-  }, [qnt]);
+  }, [qnt, dispatch]);
   return (
     <>
       <Controls />
@@ -28,7 +33,7 @@ const HomePage = () => {
 
       {status === "received" && (
         <List>
-          {countries.map((c) => {
+          {filteredCountries.map((c) => {
             const countryInfo = {
               img: c.flags.png,
               name: c.name,

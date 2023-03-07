@@ -2,9 +2,21 @@ export const SET_COUNTRIES = "@@country/SET_COUNTRIES";
 export const SET_LOADING = "@@country/SET_LOADING";
 export const SET_ERROR = "@@country/ERROR";
 export const SET_CURRENT_COUNTRY = "@@country/SET_CURRENT_COUNTRY";
+export const SET_REGION = "@@country/SET_REGION";
+export const SET_FILTER = "@@country/SET_FILTER";
+
+export const setFilter = (filter) => ({
+  type: SET_FILTER,
+  payload: filter,
+});
 
 export const setCountries = (countries) => ({
   type: SET_COUNTRIES,
+  payload: countries,
+});
+
+export const setRegion = (countries) => ({
+  type: SET_REGION,
   payload: countries,
 });
 
