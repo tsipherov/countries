@@ -12,19 +12,20 @@ const Details = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { currentCountry } = useSelector(selectCountriesInfo);
+  const { currentCountry, error, status } = useSelector(selectCountriesInfo);
 
   useEffect(() => {
     dispatch(loadCountryByName(name));
-  }, [dispatch]);
+  }, [name, dispatch]);
 
-  console.log("currentCountry >>> ", currentCountry);
   return (
     <div>
       <Button onClick={() => navigate(-1)}>
         <IoArrowBack /> Back
       </Button>
-      {currentCountry && <Info push={navigate} {...currentCountry} />}
+      {error && <h2>{error}</h2>}
+      {status === "loading" && <h2>Loading...</h2>}
+      {status === "received" && <Info push={navigate} {...currentCountry} />}
     </div>
   );
 };

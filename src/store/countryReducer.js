@@ -5,6 +5,8 @@ import {
   SET_CURRENT_COUNTRY,
   SET_REGION,
   SET_FILTER,
+  SET_BORDERS,
+  CLEAR_BORDERS,
 } from "./countryActions";
 
 const initState = {
@@ -14,12 +16,19 @@ const initState = {
   currentCountry: {},
   search: "",
   region: "",
+  borders: [],
 };
 
 export const countryReducer = (state = initState, { type, payload }) => {
   switch (type) {
+    case CLEAR_BORDERS:
+      return { ...state, borders: [] };
+
     case SET_COUNTRIES:
       return { ...state, countryList: payload, status: "received" };
+
+    case SET_BORDERS:
+      return { ...state, borders: payload, status: "received" };
 
     case SET_REGION:
       return { ...state, region: payload };

@@ -1,4 +1,8 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { clearBorders, loadBorders } from "../store/countryActions";
+import { selectCountriesInfo } from "../store/countrySelectors";
 
 const Wrapper = styled.section`
   margin-top: 3rem;
@@ -101,7 +105,17 @@ const Info = (props) => {
     borders = [],
     push,
   } = props;
-  console.log("name >>> ", name);
+
+  const dispatch = useDispatch();
+  const { borders: bordList } = useSelector(selectCountriesInfo);
+
+  useEffect(() => {
+    if (!bordList.length) dispatch(loadBorders(borders));
+
+    // return () => {
+    //   dispatch(clearBorders());
+    // };
+  }, [borders]);
   return (
     <Wrapper>
       <InfoImage src={flag} alt={name} />
@@ -151,13 +165,13 @@ const Info = (props) => {
         </ListGroup>
         <Meta>
           <b>Border Countries</b>
-          {!borders.length ? (
+          {!bordList.length ? (
             <span>There is no border countries</span>
           ) : (
             <TagGroup>
-              {borders.map((b) => (
-                <Tag key={b} onClick={() => push(`/country/${b}`)}>
-                  {b}
+              {bordList.map((b) => (
+                <Tag key={b.name} onClick={() => push(`/country/${b.name}`)}>
+                  {b.name}
                 </Tag>
               ))}
             </TagGroup>

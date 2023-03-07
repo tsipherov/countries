@@ -5,6 +5,7 @@ export const selectCountriesInfo = (state) => ({
   currentCountry: state.country.currentCountry,
   search: state.country.search,
   region: state.country.region,
+  borders: state.country.borders,
 });
 
 export const selectAllCountries = (state) => state.country.countryList;
