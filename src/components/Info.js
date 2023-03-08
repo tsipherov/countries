@@ -108,13 +108,11 @@ const Info = (props) => {
 
   const dispatch = useDispatch();
   const { borders: bordList } = useSelector(selectCountriesInfo);
-
+  // useEffect(() => {
+  //   dispatch(clearBorders());
+  // }, []);
   useEffect(() => {
     if (!bordList.length) dispatch(loadBorders(borders));
-
-    // return () => {
-    //   dispatch(clearBorders());
-    // };
   }, [borders]);
   return (
     <Wrapper>
