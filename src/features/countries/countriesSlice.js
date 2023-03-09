@@ -35,14 +35,14 @@ const countriesSlice = createSlice({
 });
 
 export const countriesReducer = countriesSlice.reducer;
-export const { setCountries, setError, setLoading } = countriesSlice.actions;
+// export const { setCountries, setError, setLoading } = countriesSlice.actions;
 export const selectCountriesInfo = (state) => ({
   status: state.countries.status,
   error: state.countries.error,
   qnt: state.countries.countryList?.length,
 });
 
-export const selectAllCountries = (state) => state.countries.countryList;
+// export const selectAllCountries = (state) => state.countries.countryList;
 
 export const selectFilteredCountries = (
   state,

@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { clearBorders, loadBorders } from "../store/countryActions";
-import { selectCountriesInfo } from "../store/countrySelectors";
+import { loadBorders, selectBorders } from "./detailsSlice";
 
 const Wrapper = styled.section`
   margin-top: 3rem;
@@ -107,13 +106,14 @@ const Info = (props) => {
   } = props;
 
   const dispatch = useDispatch();
-  const { borders: bordList } = useSelector(selectCountriesInfo);
-  // useEffect(() => {
-  //   dispatch(clearBorders());
-  // }, []);
+  const { borders: bordList } = useSelector(selectBorders);
   useEffect(() => {
-    if (!bordList.length) dispatch(loadBorders(borders));
+    if (borders.length) dispatch(loadBorders(borders));
   }, [borders]);
+  // useEffect(() => {
+  //   if (!bordList.length) dispatch(loadBorders(borders));
+  // }, [borders]);
+
   return (
     <Wrapper>
       <InfoImage src={flag} alt={name} />
@@ -168,8 +168,8 @@ const Info = (props) => {
           ) : (
             <TagGroup>
               {bordList.map((b) => (
-                <Tag key={b.name} onClick={() => push(`/country/${b.name}`)}>
-                  {b.name}
+                <Tag key={b} onClick={() => push(`/country/${b}`)}>
+                  {b}
                 </Tag>
               ))}
             </TagGroup>
