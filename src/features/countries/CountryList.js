@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Card from "../../components/Card";
 import List from "../../components/List";
+import { selectControls } from "../controls/controlsSlise";
 import {
   loadCountries,
   selectCountriesInfo,
@@ -12,9 +13,10 @@ import {
 const CountryList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { search, region } = useSelector(selectControls);
   const { status, error, qnt } = useSelector(selectCountriesInfo);
   const filteredCountries = useSelector((state) =>
-    selectFilteredCountries(state, {})
+    selectFilteredCountries(state, { search, region })
   );
 
   useEffect(() => {

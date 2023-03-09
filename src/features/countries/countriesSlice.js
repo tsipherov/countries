@@ -16,14 +16,7 @@ const initialState = {
 const countriesSlice = createSlice({
   name: "@@countries",
   initialState,
-  reducers: {
-    // setCountries: (_, { payload }) => ({
-    //   countryList: payload,
-    //   status: "received",
-    // }),
-    // setLoading: (_, action) => ({ status: "loading", error: null }),
-    // setError: (_, { payload }) => ({ error: payload, status: "rejected" }),
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(loadCountries.pending, (state) => {
@@ -56,12 +49,10 @@ export const selectFilteredCountries = (
   { search = "", region = "" }
 ) => {
   const { countryList: list } = state.countries;
-  let filteredListbyRegion = list;
-  // if (region) {
-  //   filteredListbyRegion = list.filter((country) => country.region === region);
-  // }
-  // return filteredListbyRegion.filter((country) =>
-  //   country.name.toLowerCase().includes(search.toLowerCase())
-  // );
-  return filteredListbyRegion;
+
+  return list.filter(
+    (country) =>
+      country.name.toLowerCase().includes(search.toLowerCase()) &&
+      country.region.includes(region)
+  );
 };
