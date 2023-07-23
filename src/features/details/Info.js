@@ -126,7 +126,7 @@ const Info = (props) => {
               <b>Native Name:</b> {nativeName}
             </ListItem>
             <ListItem>
-              <b>Population</b> {population}
+              <b>Population: </b> {population.toLocaleString("ua-Ua")}
             </ListItem>
             <ListItem>
               <b>Region:</b> {region}
