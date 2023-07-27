@@ -109,10 +109,8 @@ const Info = (props) => {
   const { borders: bordList } = useSelector(selectBorders);
   useEffect(() => {
     if (borders.length) dispatch(loadBorders(borders));
+    // eslint-disable-next-line
   }, [borders]);
-  // useEffect(() => {
-  //   if (!bordList.length) dispatch(loadBorders(borders));
-  // }, [borders]);
 
   return (
     <Wrapper>
